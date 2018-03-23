@@ -1,5 +1,5 @@
 {
-  "name": "sky-panda",
+  "name": "career-test",
   "version": "0.0.0",
   "description": "A sample Node.js app using Express 4",
   "engines": {
@@ -30,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/maowenzhang/sky-panda"
+    "url": "https://github.com/maowenzhang/career-test"
   },
   "keywords": [
     "node",
