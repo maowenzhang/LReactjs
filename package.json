@@ -10,7 +10,8 @@
     "start": "node index.js",
     "debug": "nodemon index.js",
     "test": "node test.js",
-    "watch": "webpack --w"
+    "watch": "webpack --w",
+    "start2": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "ejs": "^2.5.6",
