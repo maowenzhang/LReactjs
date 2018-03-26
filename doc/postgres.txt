@@ -1,0 +1,18 @@
+# postgresql db
+
+## common operations
+
+### databases
+1. list all databases
+\list \l:  list all databases
+SELECT datname FROM pg_database
+
+1. list all tables of current database
+SELECT table_schema,table_name
+FROM information_schema.tables
+
+1. connect to database
+\c <database_name>
+
+1. check current database
+ SELECT current_database();
