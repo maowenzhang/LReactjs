@@ -22,13 +22,13 @@
             "type": "node",
             "request": "launch",
             "name": "(Win) Launch Program",
-            "program": "${workspaceFolder}\\index.js"
+            "program": "${workspaceFolder}\\server.js"
         },
         {
             "type": "node",
             "request": "launch",
             "name": "(Mac) Launch Program",
-            "program": "${workspaceFolder}/index.js"
+            "program": "${workspaceFolder}/server.js"
         }
     ]
 }

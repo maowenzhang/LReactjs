@@ -7,9 +7,10 @@ const dataApi = require('./data/data-api.js');
 
 express()
   .use('/static', express.static(path.join(__dirname, 'public')))
+  .use(express.static(path.join(__dirname, 'dist')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
+  .get('/', (req, res) => res.render('index'))
   .get('/oauth/callback', function(req, res) {
 
 	  res.render('pages/index');
