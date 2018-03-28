@@ -83,8 +83,8 @@ export default class TestApp extends React.Component {
     renderTestItem() {
         return (
             <div>
-                <div class="text-left">
-                    {this.state.data.description.map(item => <p>{item}</p>)}
+                <div className="text-left">
+                    {this.state.data.description.map((item,index) => <p key={index}>{item}</p>)}
                 </div>
                 <TestItem 
                     key={this.state.currentTest.order}

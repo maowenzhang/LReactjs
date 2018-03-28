@@ -9428,11 +9428,11 @@ var TestApp = function (_React$Component) {
                 null,
                 React.createElement(
                     'div',
-                    { 'class': 'text-left' },
-                    this.state.data.description.map(function (item) {
+                    { className: 'text-left' },
+                    this.state.data.description.map(function (item, index) {
                         return React.createElement(
                             'p',
-                            null,
+                            { key: index },
                             item
                         );
                     })
@@ -9528,7 +9528,7 @@ var TestItem = function (_React$Component) {
                 null,
                 React.createElement(
                     'h3',
-                    { 'class': 'center' },
+                    { className: 'center' },
                     'No. ',
                     this.props.order
                 ),
