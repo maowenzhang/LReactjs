@@ -25,3 +25,24 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
+.navbar {
+  border-radius: 0px;
+}
+.jumbotron {
+  margin-top: -20px;
+}
+.jumbotron p {
+  margin-bottom: 1em;
+  font-size:20px;
+}
+.option {
+  text-align: left;
+  margin-bottom: 5px;
+}
+.center {
+  text-align: center
+}
+.bigTitle {
+  margin-top: 0px;
+  text-align: center;
+}
