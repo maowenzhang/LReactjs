@@ -4,7 +4,7 @@ import {Navbar, NavItem, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 export default class Header extends React.Component {
     render() {
         return (
-            <Navbar inverse collapseOnSelect baClass="navbar">
+            <Navbar inverse collapseOnSelect bsClass="navbar">
             <Navbar.Header>
                 <Navbar.Brand>
                     <a href="/">Giant Test</a>

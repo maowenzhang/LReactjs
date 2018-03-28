@@ -18,8 +18,8 @@ export default class TestApp extends React.Component {
             'currentState': TestAppStateEnum.START,
             'total': 40,
             'data' : {
-                'title': 'DISC Test',
-                'description': ['first line description', 'second line description'],
+                'title': 'DISC性格测试题',
+                'description': ['在每一个大标题中的四个选择题中只选择一个最符合你自己的，一共40题。注意：请按第一印象最快的选择，如果不能确定，可回忆童年时的情况，或者以你最熟悉的人对你的评价来从中选择。'],
                 'items': []
             },
             'currentTestNo': 0,
@@ -39,7 +39,7 @@ export default class TestApp extends React.Component {
     render() {
         return (
             <Jumbotron bsClass="jumbotron">
-                <h2 class="bigTitle">{this.state.data.title}</h2>
+                <h2 className="bigTitle">{this.state.data.title}</h2>
                 {this.renderOthers()}
             </Jumbotron>
         );

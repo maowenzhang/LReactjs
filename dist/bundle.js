@@ -9342,8 +9342,8 @@ var TestApp = function (_React$Component) {
             'currentState': TestAppStateEnum.START,
             'total': 40,
             'data': {
-                'title': 'DISC Test',
-                'description': ['first line description', 'second line description'],
+                'title': 'DISC性格测试题',
+                'description': ['在每一个大标题中的四个选择题中只选择一个最符合你自己的，一共40题。注意：请按第一印象最快的选择，如果不能确定，可回忆童年时的情况，或者以你最熟悉的人对你的评价来从中选择。'],
                 'items': []
             },
             'currentTestNo': 0,
@@ -9367,7 +9367,7 @@ var TestApp = function (_React$Component) {
                 { bsClass: 'jumbotron' },
                 React.createElement(
                     'h2',
-                    { 'class': 'bigTitle' },
+                    { className: 'bigTitle' },
                     this.state.data.title
                 ),
                 this.renderOthers()
@@ -9536,25 +9536,6 @@ var TestItem = function (_React$Component) {
             );
         }
     }, {
-        key: 'renderOption2',
-        value: function renderOption2(i) {
-            var wellStyles = { maxWidth: 400, margin: '0 auto 10px' };
-            return React.createElement(
-                'div',
-                { className: 'well', style: wellStyles },
-                React.createElement(
-                    _reactBootstrap.Button,
-                    { bsStyle: 'primary', bsSize: 'large', block: true },
-                    'Block level button'
-                ),
-                React.createElement(
-                    _reactBootstrap.Button,
-                    { bsSize: 'large', block: true },
-                    'Block level button'
-                )
-            );
-        }
-    }, {
         key: 'renderOption',
         value: function renderOption(i) {
             var _this2 = this;
@@ -9563,10 +9544,12 @@ var TestItem = function (_React$Component) {
             return React.createElement(
                 'div',
                 { style: wellStyles },
-                this.props.options.map(function (item) {
+                this.props.options.map(function (item, index) {
                     return React.createElement(
                         _reactBootstrap.Button,
-                        { bsClass: 'btn btn-lg btn-default option', onClick: function onClick() {
+                        { className: 'btn btn-lg btn-default option',
+                            key: index,
+                            onClick: function onClick() {
                                 return _this2.handleClick(item[2]);
                             } },
                         item[0],
@@ -38749,14 +38732,14 @@ var StartTest = function (_React$Component) {
 
             return React.createElement(
                 'div',
-                { 'class': 'center' },
+                { className: 'center' },
                 React.createElement(
                     'div',
-                    { 'class': 'text-left' },
-                    this.props.description.map(function (item) {
+                    { className: 'text-left' },
+                    this.props.description.map(function (item, index) {
                         return React.createElement(
                             'p',
-                            null,
+                            { key: index },
                             item
                         );
                     })
@@ -38766,7 +38749,7 @@ var StartTest = function (_React$Component) {
                     null,
                     React.createElement(
                         _reactBootstrap.Button,
-                        { bsClass: 'btn btn-primary btn-lg', onClick: function onClick() {
+                        { className: 'btn btn-primary btn-lg', onClick: function onClick() {
                                 return _this2.props.onClick();
                             } },
                         '\u5F00\u59CB\u6D4B\u8BD5'
@@ -38873,7 +38856,7 @@ var Header = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 _reactBootstrap.Navbar,
-                { inverse: true, collapseOnSelect: true, baClass: 'navbar' },
+                { inverse: true, collapseOnSelect: true, bsClass: 'navbar' },
                 React.createElement(
                     _reactBootstrap.Navbar.Header,
                     null,
