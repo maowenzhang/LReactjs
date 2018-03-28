@@ -39,7 +39,7 @@ export default class TestApp extends React.Component {
     render() {
         return (
             <Jumbotron bsClass="jumbotron">
-                <h2 class="center" style="margin-top:0px;">{this.state.data.title}</h2>
+                <h2 class="bigTitle">{this.state.data.title}</h2>
                 {this.renderOthers()}
             </Jumbotron>
         );

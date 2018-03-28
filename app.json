@@ -1,7 +1,7 @@
 {
   "name": "Start on Heroku: Node.js",
   "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/maowenzhang/sky-panda",
+  "repository": "https://github.com/maowenzhang/career-test",
   "logo": "",
   "keywords": ["node", "express", "heroku"],
   "image": "heroku/nodejs"

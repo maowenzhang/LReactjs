@@ -1,7 +1,6 @@
-# sky-panda
+# career-test 
 
-A personal blog
-
+A simple site for DISC tests using nodejs + expressjs + reactjs + postgresql on heroku
 
 ## Running Locally
 
@@ -9,7 +8,7 @@ Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cl
 
 ```sh
 $ git clone ...
-$ cd sky-panda
+$ cd career-test
 $ npm install
 $ npm start
 ```

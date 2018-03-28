@@ -1,7 +1,7 @@
 {
   "name": "career-test",
   "version": "0.0.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "career tests",
   "engines": {
     "node": "8.9.1"
   },
