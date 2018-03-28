@@ -3,6 +3,7 @@ var React = require('react');
 import TestItem from './TestItem.jsx';
 import StartTest from './StartTest.jsx';
 import FinishTest from './FinishTest.jsx';
+import {Jumbotron} from 'react-bootstrap';
 
 const TestAppStateEnum = {
     START: 0,
@@ -36,6 +37,14 @@ export default class TestApp extends React.Component {
     }
 
     render() {
+        return (
+            <Jumbotron bsClass="jumbotron">
+                <h2 class="center" style="margin-top:0px;">{this.state.data.title}</h2>
+                {this.renderOthers()}
+            </Jumbotron>
+        );
+    }
+    renderOthers() {
         if (this.state.currentState == TestAppStateEnum.START) {
             return this.renderStartTest();
         }
@@ -45,22 +54,13 @@ export default class TestApp extends React.Component {
         return this.renderFinishTest();
     }
 
-    renderAppHeader() {
-        return (
-            <div>
-                <h2>{this.state.data.title}</h2>
-            </div>
-        );
-    }
-
     renderStartTest() {
         return (
             <div>
-                {this.renderAppHeader()}
-                {this.state.data.description.map(item => 
-                    <h3>{item}</h3>
-                )}
-                <StartTest onClick={() => this.handleClickStartTest()}/>
+                <StartTest 
+                    title={this.state.data.title}
+                    description={this.state.data.description}
+                    onClick={() => this.handleClickStartTest()}/>
             </div>
         );
     }
@@ -75,8 +75,7 @@ export default class TestApp extends React.Component {
         let testResultMessage = JSON.stringify(testResultCount);
         return (
             <div>
-                {this.renderAppHeader()}
-                <FinishTest {... testResultCount} />
+                <FinishTest message={testResultMessage} {... testResultCount} />
             </div>
         );
     }
@@ -84,7 +83,9 @@ export default class TestApp extends React.Component {
     renderTestItem() {
         return (
             <div>
-                {this.renderAppHeader()}
+                <div class="text-left">
+                    {this.state.data.description.map(item => <p>{item}</p>)}
+                </div>
                 <TestItem 
                     key={this.state.currentTest.order}
                     {... this.state.currentTest}
@@ -96,7 +97,7 @@ export default class TestApp extends React.Component {
 
     handleClick(order, value) {
 
-        this.state.testResult.append((order, value));
+        this.state.testResult.push((order, value));
 
         this.state.currentTestNo += 1;
 

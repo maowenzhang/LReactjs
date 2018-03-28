@@ -1,6 +1,6 @@
 var React = require('react');
 
-import Option from './Option.jsx';
+import {Button, ButtonGroup} from 'react-bootstrap';
 
 export default class TestItem extends React.Component {
     constructor(props) {
@@ -11,18 +11,32 @@ export default class TestItem extends React.Component {
     render() {
         return (
             <div>
-                <h3>No. {this.props.order}</h3>
+                <h3 class='center'>No. {this.props.order}</h3>
                 { this.renderOption(1) }
             </div>
         );
     }
+    renderOption2(i) {
+        const wellStyles = { maxWidth: 400, margin: '0 auto 10px' };
+        return (
+            <div className="well" style={wellStyles}>
+                <Button bsStyle="primary" bsSize="large" block>
+                Block level button
+                </Button>
+                <Button bsSize="large" block>
+                Block level button
+                </Button>
+            </div>
+            );
+    }
 
     renderOption(i) {
+        const wellStyles = { maxWidth: 500, margin: '0 auto 10px' };
         return (
-            <div>
-                {this.props.options.map(item => 
-                    <Option value={item[1]} onClick={() => this.handleClick(item[2])}/>
-                )}
+            <div style={wellStyles}>
+                    {this.props.options.map(item => 
+                        <Button bsClass="btn btn-lg btn-default option" onClick={() => this.handleClick(item[2])}>{item[0]}. {item[1]}</Button>
+                    )}
             </div>
         );
     }

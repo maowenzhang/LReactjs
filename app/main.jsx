@@ -3,12 +3,14 @@ var ReactDOM = require('react-dom');
 
 import 'whatwg-fetch';
 import TestApp from './components/TestApp.jsx';
+import Header from './components/Header.jsx';
 
 export class App extends React.Component{
     render(){
-      return(
+      return [
+          <Header />,
           <TestApp />
-      );
+      ];
     }
 }
 
