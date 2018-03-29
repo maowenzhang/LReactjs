@@ -1,32 +1,24 @@
 var React = require('react');
-import {Navbar, NavItem, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 
 export default class Header extends React.Component {
     render() {
         return (
-            <Navbar inverse collapseOnSelect baClass="navbar">
-            <Navbar.Header>
-                <Navbar.Brand>
-                    <a href="/">Giant Test</a>
-                </Navbar.Brand>
-                <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-                <Nav>
-                {/* <NavItem eventKey={1} href="#">
-                    Link
-                </NavItem> */}
-                    {/* <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                        <MenuItem eventKey={3.1}>Action</MenuItem>
-                    </NavDropdown> */}
-                </Nav>
-                <Nav pullRight>
-                    <NavItem eventKey={2} href="#">
-                        登陆
-                    </NavItem>
-                </Nav>
-            </Navbar.Collapse>
-            </Navbar>
+            <div id="navbar" class="navbar-collapse collapse">
+                {/* <ul className="nav navbar-nav">
+                    <li><a href="#">About</a></li>
+                    <li className="dropdown">
+                        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul className="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+                </ul> */}
+                <ul className="nav navbar-nav navbar-right">
+                    <li className=""><a href="/login">登陆</a></li>
+                    <li ><a href="/signup">注册</a></li>
+                </ul>
+            </div>
         );
     }
 }
