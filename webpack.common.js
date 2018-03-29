@@ -1,10 +1,17 @@
 const path = require('path');
+// const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: "./app/main.jsx", // string | object | array
   // Here the application starts executing
   // and webpack starts bundling
-
+  plugins: [
+    // new CleanWebpackPlugin(['dist'])
+    // new HtmlWebpackPlugin({
+    //   title: 'Production'
+    // })
+  ],
   output: {
     // options related to how webpack emits results
 
@@ -20,6 +27,7 @@ module.exports = {
     loaders : [
       {
         test : /\.jsx?/,
+        include: /app/,
         exclude: /node_modules/,
         loader : 'babel-loader',
         query:
@@ -30,6 +38,5 @@ module.exports = {
     ]
   },
 
-  watch : true,
-  devtool: "source-map"
+  watch : true
 }

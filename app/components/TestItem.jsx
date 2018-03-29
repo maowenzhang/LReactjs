@@ -1,7 +1,5 @@
 var React = require('react');
 
-import {Button, ButtonGroup} from 'react-bootstrap';
-
 export default class TestItem extends React.Component {
     constructor(props) {
         super(props);
@@ -22,9 +20,9 @@ export default class TestItem extends React.Component {
         return (
             <div style={wellStyles}>
                     {this.props.options.map((item, index) => 
-                        <Button className="btn btn-lg btn-default option" 
+                        <button className="btn btn-lg btn-default option" 
                                 key={index}
-                                onClick={() => this.handleClick(item[2])}>{item[0]}. {item[1]}</Button>
+                                onClick={() => this.handleClick(item[2])}>{item[0]}. {item[1]}</button>
                     )}
             </div>
         );

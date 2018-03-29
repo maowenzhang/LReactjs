@@ -3,7 +3,6 @@ var React = require('react');
 import TestItem from './TestItem.jsx';
 import StartTest from './StartTest.jsx';
 import FinishTest from './FinishTest.jsx';
-import {Jumbotron} from 'react-bootstrap';
 
 const TestAppStateEnum = {
     START: 0,
@@ -38,10 +37,10 @@ export default class TestApp extends React.Component {
 
     render() {
         return (
-            <Jumbotron bsClass="jumbotron">
+            <div className="jumbotron">
                 <h2 className="bigTitle">{this.state.data.title}</h2>
                 {this.renderOthers()}
-            </Jumbotron>
+            </div>
         );
     }
     renderOthers() {
@@ -124,5 +123,4 @@ export default class TestApp extends React.Component {
             }.bind(this)
         });
     }
-    
 }
