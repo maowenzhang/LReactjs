@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm.jsx';
 
@@ -68,4 +69,6 @@ class LoginPage extends React.Component {
 
 }
 
-export default LoginPage;
+ReactDOM.render(<LoginPage />, document.getElementById('login-app'));
+
+// export default LoginPage;

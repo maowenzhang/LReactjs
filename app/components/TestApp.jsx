@@ -17,7 +17,7 @@ export default class TestApp extends React.Component {
             'currentState': TestAppStateEnum.START,
             'total': 40,
             'data' : {
-                'title': 'DISC性格测试题',
+                'title': 'DISC性格测试',
                 'description': ['在每一个大标题中的四个选择题中只选择一个最符合你自己的，一共40题。注意：请按第一印象最快的选择，如果不能确定，可回忆童年时的情况，或者以你最熟悉的人对你的评价来从中选择。'],
                 'items': []
             },
@@ -72,9 +72,14 @@ export default class TestApp extends React.Component {
         let testResultCount = {};
         this.state.testResult.forEach(item => testResultCount[item] = (testResultCount[item] || 0) + 1);
         let testResultMessage = JSON.stringify(testResultCount);
+        let count_D = testResultCount['D'] || 0;
+        let count_I = testResultCount['I'] || 0;
+        let count_S = testResultCount['S'] || 0;
+        let count_C = testResultCount['C'] || 0;
+        let newmsg = `结果统计: D-${count_D}, I-${count_I}, S-${count_S}, C-${count_C}`;
         return (
             <div>
-                <FinishTest message={testResultMessage} {... testResultCount} />
+                <FinishTest message={newmsg} {... testResultCount} />
             </div>
         );
     }

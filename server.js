@@ -13,6 +13,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('index'));
+app.get('/login', (req, res) => res.render("login"));
+app.post('/login', function(req, res) {
+  res.send("log in submitted");
+});
 app.get('/oauth/callback', function(req, res) {
 
 	  res.render('pages/index');

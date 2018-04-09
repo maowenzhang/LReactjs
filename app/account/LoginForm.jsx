@@ -9,20 +9,20 @@ const LoginForm = ({
 }) => (
   <div className="container">
     <form action="/" onSubmit={onSubmit} className="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form">
-      <h3 className="form-title">Login</h3>
+      <h3 className="form-title"></h3>
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       <div className="form-group">
-          <input className="form-control eamil" type="text" placeholder="Email" name="email" onChange={onChange}/>
+          <input className="form-control eamil" type="text" placeholder="邮箱地址" name="email" onChange={onChange}/>
       </div>
 
       <div className="form-group">
-        <input className="form-control required" type="password" placeholder="Password" name="password" onChnage={onChange} maxlength="8"/> 
+        <input className="form-control required" type="password" placeholder="密码" name="password" onChange={onChange} maxLength="8"/> 
       </div>
 
       <div className="form-group">
-        <button className="btn btn-success" type="submit" label="登陆" />
+        <button className="btn btn-success" type="submit" label="登陆">登 陆</button>
       </div>
     </form>
   </div>

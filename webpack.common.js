@@ -3,7 +3,11 @@ const path = require('path');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: "./app/main.jsx", // string | object | array
+  // entry: "./app/main.jsx", // string | object | array
+  entry: ["./app/main.jsx", 
+          "./app/account/LoginPage.jsx",
+          "./app/account/SignUpPage.jsx"
+         ],
   // Here the application starts executing
   // and webpack starts bundling
   plugins: [
