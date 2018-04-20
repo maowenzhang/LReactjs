@@ -8,8 +8,8 @@ const LoginForm = ({
   user
 }) => (
   <div className="container">
-    <form action="/" onSubmit={onSubmit} className="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form">
-      <h3 className="form-title"></h3>
+    <form method="post" action="/login" className="form-horizontal" id="login_form">
+      {/* <h3 className="form-title"></h3> */}
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 

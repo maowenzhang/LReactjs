@@ -8,15 +8,23 @@ const SignUpForm = ({
   user,
 }) => (
   <div className="container">
-    <form action="/" onSubmit={onSubmit} className="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form">
-      <h3 className="form-title">注册</h3>
+    <form method="post" action="/signup" className="form-horizontal" id="register_form">
+      {/* <h3 className="form-title">注册</h3> */}
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
-      <input className="form-control eamil" type="text" placeholder="Email" name="email"/>
-      <input className="form-control required" type="password" placeholder="Password" id="register_password" name="password"/>
-      <input className="form-control required" type="password" placeholder="Re-type Your Password" name="rpassword"/>
-      <input type="submit" className="btn btn-success pull-right" value="创建新账号"/>  
+      <div className="form-group">
+        <input className="form-control eamil" type="text" placeholder="Email" name="email"/>
+      </div>
+      <div className="form-group">
+        <input className="form-control required" type="password" placeholder="Password" id="register_password" name="password"/>
+      </div>
+      <div className="form-group">
+        <input className="form-control required" type="password" placeholder="Re-type Your Password" name="rpassword"/>
+      </div>
+      <div className="form-group">
+        <input type="submit" className="btn btn-success" value="创建新账号"/>  
+      </div>
 
     </form>
   </div>

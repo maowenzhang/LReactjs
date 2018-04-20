@@ -15,15 +15,44 @@ export default class Header extends React.Component {
                         </ul>
                     </li>
                 </ul> */}
-                <ul className="nav navbar-nav navbar-right">
-                    <li className=""><a href="/login">登陆</a></li>
-                    <li ><a href="/signup">注册</a></li>
-                </ul>
+                {this.renderUserOrLogin()}
                 {/* <div className="top-bar-right">
                     <Link to="/login">Log in</Link>
                     <Link to="/signup">Sign up</Link>
                 </div> */}
             </div>
+        );
+    }
+
+    isLogin() {
+        if (this.props.user) {
+            return true;
+        }
+        return false;
+    }
+
+    renderUserOrLogin() {
+        if (this.isLogin()) {
+            return this.renderUserInfo();
+        } else {
+            return this.renderLogin();
+        }
+    }
+
+    renderLogin() {
+        return (
+            <ul className="nav navbar-nav navbar-right">
+                <li className=""><a href="/login">登陆</a></li>
+                <li ><a href="/signup">注册</a></li>
+            </ul>
+        );
+    }
+
+    renderUserInfo() {
+        return (
+            <ul className="nav navbar-nav navbar-right">
+                <li className=""><a href="#">欢迎 {this.props.user}</a></li>
+            </ul>
         );
     }
 }

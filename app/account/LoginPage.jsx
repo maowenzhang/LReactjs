@@ -34,6 +34,8 @@ class LoginPage extends React.Component {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
 
+
+
     console.log('email:', this.state.user.email);
     console.log('password:', this.state.user.password);
   }
@@ -69,6 +71,8 @@ class LoginPage extends React.Component {
 
 }
 
-ReactDOM.render(<LoginPage />, document.getElementById('login-app'));
+if (document.getElementById('login-app')) {
+  ReactDOM.render(<LoginPage />, document.getElementById('login-app'));
+}
 
 // export default LoginPage;

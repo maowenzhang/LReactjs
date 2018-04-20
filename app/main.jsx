@@ -7,12 +7,13 @@ import Header from './components/Header.jsx';
 // import SignUpPage from './account/SignUpPage.jsx';
 // import { BrowserRouter, Route } from 'react-router-dom';
 
+var headerContainer = document.getElementById('navbar-right-part');
 ReactDOM.render((
-        <div>
-            <Header />
-        </div>
+        <Header 
+            user={headerContainer.getAttribute('user')}
+        />
     ),
-    document.getElementById('navbar-right-part')
+    headerContainer
 );
 
 if (document.getElementById('react-app')) {

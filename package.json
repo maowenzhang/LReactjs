@@ -1,10 +1,8 @@
 {
   "name": "career-test",
-  "version": "0.0.0",
+  "version": "0.0.2",
+  "private": true,
   "description": "career tests",
-  "engines": {
-    "node": "8.9.1"
-  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -15,11 +13,17 @@
     "build-prod": "webpack --config webpack.prod.js"
   },
   "dependencies": {
+    "aws-sdk": "^2.225.1",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-session": "^2.0.0-beta.3",
     "dotenv": "^5.0.1",
-    "ejs": "^2.5.8",
+    "ejs": "latest",
     "express": "^4.16.3",
-    "lodash": "^4.17.5",
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -27,9 +31,7 @@
     "react-markdown": "^3.3.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-tap-event-plugin": "^3.0.2",
-    "validator": "^9.4.1",
-    "whatwg-fetch": "^2.0.3"
+    "request": "^2.85.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -51,7 +53,6 @@
   },
   "keywords": [
     "node",
-    "heroku",
     "express"
   ],
   "license": "MIT"

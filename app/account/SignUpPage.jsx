@@ -71,4 +71,8 @@ class SignUpPage extends React.Component {
 
 }
 
-export default SignUpPage;
+if (document.getElementById('signup-app')) {
+  ReactDOM.render(<SignUpPage />, document.getElementById('signup-app'));
+}
+
+// export default SignUpPage;
