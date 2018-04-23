@@ -25,7 +25,7 @@ export default class Invite extends React.Component {
 
 
             <div className="form-group">
-                <input className="form-control email" 
+                <input className="form-control email input-lg" 
                        id="id-email" type="text"
                        placeholder="Email" name="email" 
                        onChange={this.onChange.bind(this)}
@@ -33,7 +33,7 @@ export default class Invite extends React.Component {
             </div>
 
             <div className="form-group">
-              <button className="btn btn-success" 
+              <button className="btn btn-primary btn-lg" 
                       id="id-submit"
                       type="submit" label="邀请" 
                       disabled={this.state.disableSubmit}

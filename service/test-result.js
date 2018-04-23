@@ -50,7 +50,7 @@ TestResult.prototype.submitTestResult = function(req, testResultData) {
             });
             g_mailService.sendMail(toEmail, subject, text, html)
             .then((data) => {
-                var msg = `测试结果已提交，并已通知相关人员。`;
+                var msg = `测试结果已提交，谢谢！`;
                 resolve(msg);
             }).catch((err) => {
                 reject(err);

@@ -9,7 +9,7 @@ export default class TestItem extends React.Component {
     render() {
         return (
             <div>
-                <h3 className='center'>No. {this.props.order}</h3>
+                <h3 className='center'>No. {this.props.order} / 40</h3>
                 { this.renderOption(1) }
             </div>
         );
