@@ -56,7 +56,7 @@ var getUserInfo = function (req) {
 	if (req.user) {
 		userInfo.user = req.user.email;
 		userInfo.userId = req.user.id;
-		userInfo.userRole = req.user.role;
+		userInfo.userRole = req.user.userRole;
 	}
 	return userInfo;
 }
@@ -121,11 +121,19 @@ var authAdmin = function (req, res, next) {
 		redirect('/login');
 		return;
 	}
-	if (!req.user.role === 'admin') {
+	if (!req.user.userRole === 'admin') {
 		redirect('/login');
 		return;
 	}
 
+	next();
+}
+
+var authUser = function (req, res, next) {
+	if (!req.user) {
+		redirect('/login');
+		return;
+	}
 	next();
 }
 
@@ -169,10 +177,8 @@ app.post('/invite-link/:userId',
 		res.redirect('/');
 	});
 
-app.post('/submit-test',
-	passport.authenticate('local-login', { failureRedirect: '/login' }),
-	function (req, res) {
-		var testResultCount = req.body.testResult;
+app.post('/submit-test', authUser, function (req, res) {
+		var testResultCount = req.body;
 		let testResult = new TestResult();
 		testResult.submitTestResult(req, testResultCount)
 			.then((msg) => {
@@ -180,7 +186,7 @@ app.post('/submit-test',
 			}).catch((err) => {
 				res.send(err);
 			})
-	});
+});
 
 app.get('/test-result', authAdmin, (req, res) => {
 	var userInfo = getUserInfo(req);

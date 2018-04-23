@@ -54,7 +54,7 @@ InviteUser.prototype.logInInvitedUser = function(req, userId) {
             var hasLogIn = false;
             var data = {'userObj': userObj, 'hasLogIn': hasLogIn};
 			// if (!bcrypt.compareSync(password, userObj.pw)) {
-            if (userObj.role === "admin") {
+            if (userObj.userRole === "admin") {
                 console.log("can't auto login admin user");
                 resolve(data);
             } else {

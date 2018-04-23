@@ -61,7 +61,7 @@ AWSService.prototype.createUser = function(email, password) {
                 "id": { "N": (Math.floor(Math.random() * 4294967296)).toString() },
                 "email": { "S": email },
                 "pw": { "S": bcrypt.hashSync(password) },
-                "role": { "S": "member" }
+                "userRole": { "S": "member" }
             }
         };
         g_DB.putItem(params, function (err, data) {
@@ -79,9 +79,14 @@ AWSService.getUserObjectFromDBItem = function(dbItem) {
     var obj = {
         "id"    :    dbItem.id.N,
         "email" :    dbItem.email.S,
-        "pw"    :    dbItem.pw.S,
-        "role"  :    dbItem.role.S
+        "pw"    :    dbItem.pw.S
     };
+    if (dbItem.userRole) {
+        obj['userRole'] = dbItem.userRole.S;
+    }
+    if (dbItem.disc) {
+        obj['disc'] = dbItem.disc.S;
+    }
     return obj;
 }
 
@@ -118,7 +123,7 @@ AWSService.prototype.updateUser = function(userId, testResultData) {
             if (err) {
                 reject(err);
             } else {
-                var userObj = AWSService.getUserObjectFromDBItem(data.Item);
+                var userObj = AWSService.getUserObjectFromDBItem(data.Attributes);
                 resolve(userObj);
             }
         });
@@ -153,6 +158,40 @@ AWSService.prototype.getUserByEmail = function(email) {
             } else {
                 var userId = data.Items[0]["id"].N;
                 resolve(userId);
+            }
+        });
+    });
+}
+
+AWSService.prototype.getAdminUsers = function() {
+    var that = this;
+    return new Promise((resolve, reject) => {
+        var params = {
+            "TableName": that.tableName,
+            "FilterExpression": "userRole = :val",
+            "ExpressionAttributeValues": {":val": {"S": "admin"}},
+            "ReturnConsumedCapacity": "TOTAL"
+        };
+        console.log("Scanning for :" + JSON.stringify(params))//.Items["email"].name)
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        g_DB.scan(params, function (err, data) {
+            // if there are any errors, return the error
+            if (err) {
+                reject(err);
+            }
+            // check to see if theres already a user with that email
+            else if (data.Items.length <= 0) {
+                resolve([]);
+            } else {
+                var userId = data.Items[0]["id"].N;
+                var userObjs = [];
+                data.Items.map((item) => {
+                    var userObj = AWSService.getUserObjectFromDBItem(item);
+                    userObjs.push(userObj);
+                });
+                resolve(userObjs);
             }
         });
     });

@@ -157,7 +157,10 @@ export default class TestApp extends React.Component {
             that.state.testResultCount[item] += 1;
         });
 
-        var data = {'testResult': this.state.testResultCount};
+        that.state.isSubmitingTest = true;
+        that.setState(that.state);
+
+        var data = this.state.testResultCount;
 
         $.ajax({
             url: "/submit-test",
