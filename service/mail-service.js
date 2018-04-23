@@ -4,16 +4,16 @@ var MailService = function() {
 
     // create reusable transporter object using the default SMTP transport
     this.transporter = nodemailer.createTransport({
-        host: 'smtp.163.com',
+        host: 'smtp.qq.com',
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: 'xgiants_test@163.com',
-            pass: 'Rachel2018'
+            user: '251371245@qq.com',
+            pass: process.env.EMAIL_AUTHCODE
         }
     });
 
-    this.fromEmail = 'xgiants_test@163.com';
+    this.fromEmail = '251371245@qq.com';
 
 };
 
