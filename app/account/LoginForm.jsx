@@ -14,7 +14,7 @@ const LoginForm = ({
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       <div className="form-group">
-          <input className="form-control eamil" type="text" placeholder="邮箱地址" name="email" onChange={onChange}/>
+          <input className="form-control eamil" type="text" placeholder="Email" name="email" onChange={onChange} value={user.email}/>
       </div>
 
       <div className="form-group">

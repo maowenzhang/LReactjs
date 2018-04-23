@@ -3,6 +3,8 @@ var React = require('react');
 import TestItem from './TestItem.jsx';
 import StartTest from './StartTest.jsx';
 import FinishTest from './FinishTest.jsx';
+import Spinner from './Spinner.jsx';
+import Message from './Message.jsx';
 
 const TestAppStateEnum = {
     START: 0,
@@ -26,8 +28,27 @@ export default class TestApp extends React.Component {
                         ["1", "option 1", "D"],
                         ["2", "option 2", "D"]
             ]},
-            'testResult' : []
+            'testResult' : [],
+            'testResultCount' : {
+                'D' : 0,
+                'I' : 0,
+                'S' : 0,
+                'C' : 0,
+            },
+            isSubmitingTest: false,
+            messageOption: {
+                message: '',
+                errorMessage: '',
+                show: true
+            }
         }
+    }
+
+    isLogin() {
+        if ($('#id-user').length) {
+            return true;
+        }
+        return false;
     }
 
     updateStateData() {
@@ -44,6 +65,18 @@ export default class TestApp extends React.Component {
         );
     }
     renderOthers() {
+        if (!this.isLogin()) {
+            return (
+                <div className="center">
+                    <div className="text-left">
+                        {this.state.data.description.map((item, index) => <p key={index}>{item}</p>)}
+                    </div>
+                    <p>
+                        <a className="btn btn-primary btn-lg" href="/login">请登陆</a>
+                    </p>
+                </div>
+            );
+        }
         if (this.state.currentState == TestAppStateEnum.START) {
             return this.renderStartTest();
         }
@@ -69,17 +102,17 @@ export default class TestApp extends React.Component {
     }
 
     renderFinishTest() {
-        let testResultCount = {};
-        this.state.testResult.forEach(item => testResultCount[item] = (testResultCount[item] || 0) + 1);
-        let testResultMessage = JSON.stringify(testResultCount);
-        let count_D = testResultCount['D'] || 0;
-        let count_I = testResultCount['I'] || 0;
-        let count_S = testResultCount['S'] || 0;
-        let count_C = testResultCount['C'] || 0;
+        let count_D = this.state.testResultCount['D'] || 0;
+        let count_I = this.state.testResultCount['I'] || 0;
+        let count_S = this.state.testResultCount['S'] || 0;
+        let count_C = this.state.testResultCount['C'] || 0;
         let newmsg = `结果统计: D-${count_D}, I-${count_I}, S-${count_S}, C-${count_C}`;
         return (
             <div>
-                <FinishTest message={newmsg} {... testResultCount} />
+                <FinishTest message={newmsg} {... this.state.testResultCount} />
+
+                <Spinner className="data-panel-spinner" show={this.state.isSubmitingTest}/>
+                <Message {... this.state.messageOption}/>
             </div>
         );
     }
@@ -105,13 +138,43 @@ export default class TestApp extends React.Component {
 
         this.state.currentTestNo += 1;
 
+        // For testing
+        this.state.currentTestNo += 10;
+
         // Finish testing
         if (this.state.currentTestNo >= this.state.data.items.length) {
+            this.onFinishedTesting();
             this.setState( {currentState : TestAppStateEnum.FINISHED} );
             return;
         }
 
         this.updateStateData();
+    }
+
+    onFinishedTesting() {
+        var that = this;
+        this.state.testResult.forEach(item => {
+            that.state.testResultCount[item] += 1;
+        });
+
+        var data = {'testResult': this.state.testResultCount};
+
+        $.ajax({
+            url: "/submit-test",
+            method: 'POST',
+            data: data,
+            success: function(result) {
+                that.state.messageOption.message = result;
+                that.state.isSubmitingTest = false;
+                that.setState(that.state);
+            },
+            error: function(xhr, status, err) {
+                console.error("Failed to submit test result ", status, err);
+                that.state.messageOption.errorMessage = err;
+                that.state.isSubmitingTest = false;
+                that.setState(that.state);
+            }
+        }); 
     }
 
     componentDidMount() {

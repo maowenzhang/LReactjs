@@ -116,3 +116,33 @@ a:hover {
 .btn {
   min-width: 100px;
 }
+
+/* Divider vertical for bootstrap 3 */
+.navbar .divider-vertical {
+  height: 50px;
+  margin: 0 9px;
+  border-right: 1px solid #ffffff;
+  border-left: 1px solid #f2f2f2;
+}
+
+.navbar-inverse .divider-vertical {
+  border-right-color: grey;
+  border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse .nav > .divider-vertical {
+      display: none;
+   }
+}
+
+#id-email {
+  width: 350px;
+  margin: 20px auto;
+}
+
+.loading-placeholder {
+  width: 50px;
+  height: 50px;
+  margin: 5px auto;
+}

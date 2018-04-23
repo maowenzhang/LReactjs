@@ -16,10 +16,30 @@ export default class Header extends React.Component {
                     </li>
                 </ul> */}
                 {this.renderUserOrLogin()}
-                {/* <div className="top-bar-right">
-                    <Link to="/login">Log in</Link>
-                    <Link to="/signup">Sign up</Link>
-                </div> */}
+                {this.renderAdminFeatures()}
+            </div>
+        );
+    }
+
+    isAdmin() {
+        if (this.props.userRole === 'admin') {
+            return true;
+        }
+        return false;
+    }
+
+    renderAdminFeatures() {
+        if (!this.isAdmin()) {
+            return (<div/>);
+        }
+
+        return (
+            <div>
+                <ul className="nav navbar-nav navbar-right">
+                    <li className=""><a href="/invite">邀请好友</a></li>
+                    <li ><a href="/test-result">测试记录</a></li>
+                    <li className="divider-vertical"></li>
+                </ul>
             </div>
         );
     }
@@ -51,7 +71,8 @@ export default class Header extends React.Component {
     renderUserInfo() {
         return (
             <ul className="nav navbar-nav navbar-right">
-                <li className=""><a href="#">欢迎 {this.props.user}</a></li>
+                <li className=""><a id="id-user" href={this.props.userId}>欢迎 {this.props.user}</a></li>
+                <li ><a href="/logout">退出</a></li>
             </ul>
         );
     }

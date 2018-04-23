@@ -17,10 +17,10 @@ const SignUpForm = ({
         <input className="form-control eamil" type="text" placeholder="Email" name="email"/>
       </div>
       <div className="form-group">
-        <input className="form-control required" type="password" placeholder="Password" id="register_password" name="password"/>
+        <input className="form-control required" type="password" placeholder="密码" id="register_password" name="password"/>
       </div>
       <div className="form-group">
-        <input className="form-control required" type="password" placeholder="Re-type Your Password" name="rpassword"/>
+        <input className="form-control required" type="password" placeholder="再次输入密码" name="rpassword"/>
       </div>
       <div className="form-group">
         <input type="submit" className="btn btn-success" value="创建新账号"/>  
