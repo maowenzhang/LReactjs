@@ -139,7 +139,7 @@ export default class TestApp extends React.Component {
         this.state.currentTestNo += 1;
 
         // For testing
-        this.state.currentTestNo += 10;
+        // this.state.currentTestNo += 10;
 
         // Finish testing
         if (this.state.currentTestNo >= this.state.data.items.length) {

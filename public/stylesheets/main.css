@@ -24,6 +24,9 @@
     border: 2px solid white; }
     .jumbotron .lang-logo img {
       max-width: 100%; }
+  .jumbotron .alert-success {
+    background-color: #532F8C; 
+  }
 
 .navbar {
   border-radius: 0px;

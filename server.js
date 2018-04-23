@@ -178,19 +178,29 @@ app.post('/invite-link/:userId',
 	});
 
 app.post('/submit-test', authUser, function (req, res) {
-		var testResultCount = req.body;
-		let testResult = new TestResult();
-		testResult.submitTestResult(req, testResultCount)
-			.then((msg) => {
-				res.send(msg);
-			}).catch((err) => {
-				res.send(err);
-			})
+	var testResultCount = req.body;
+	let testResult = new TestResult();
+	testResult.submitTestResult(req, testResultCount)
+		.then((msg) => {
+			res.send(msg);
+		}).catch((err) => {
+			res.send(err);
+		})
 });
 
 app.get('/test-result', authAdmin, (req, res) => {
 	var userInfo = getUserInfo(req);
 	res.render('result', userInfo);
+});
+
+app.get('/test-result-data', authAdmin, (req, res) => {
+	let testResult = new TestResult();
+	testResult.getTestResultData(req)
+		.then((data) => {
+			res.json(data);
+		}).catch((err) => {
+			res.send(err);
+		})
 });
 
 // ------------------------------------------

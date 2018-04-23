@@ -10,7 +10,8 @@ export default class Result extends React.Component {
         messageOption: {
           message: '',
           errorMessage: '',
-          show: true
+          show: true,
+          simpleFormat: true
         }
       }
     }
@@ -19,8 +20,17 @@ export default class Result extends React.Component {
       return (
         <div className="container">
             <h2>测试结果</h2>
-
-            <Spinner className="data-panel-spinner" show={this.state.isSendingEmail}/>
+            <Spinner className="data-panel-spinner" show={this.state.isLoading}/>
+            <table data-pagination="true" data-search="true" data-toggle="table" data-url="/test-result-data">
+                <thead>
+                    <tr>
+                        <th data-sortable="true" data-field="id">用户ID</th>
+                        <th data-field="email">Email</th>
+                        <th data-field="userRole">用户角色</th>
+                        <th data-field="disc">DISC 测试结果</th>
+                    </tr>
+                </thead>
+            </table>
             <Message {... this.state.messageOption}/>
         </div>
       );

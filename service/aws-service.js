@@ -8,13 +8,14 @@ var AWSService = function() {
 
     // Initialize dynamodb
     if (!g_DB) {
-        if (process.env.REGION) {
+        if (process.env.AWS_REGION) {
             aws.config.region = process.env.REGION
         }
-        else {
-            aws.config.update({region: "ap-southeast-1"});
-            aws.config.credentials = new aws.SharedIniFileCredentials({profile: 'default'});
-        }
+        aws.config.update({region: "ap-southeast-1"});
+        // else {
+        //     aws.config.update({region: "ap-southeast-1"});
+        //     aws.config.credentials = new aws.SharedIniFileCredentials({profile: 'default'});
+        // }
         g_DB = new aws.DynamoDB();
     }
 
@@ -197,4 +198,35 @@ AWSService.prototype.getAdminUsers = function() {
     });
 }
 
+AWSService.prototype.getAllUsers = function() {
+    var that = this;
+    return new Promise((resolve, reject) => {
+        var params = {
+            "TableName": that.tableName,
+            "ReturnConsumedCapacity": "TOTAL"
+        };
+        console.log("Scanning for :" + JSON.stringify(params))//.Items["email"].name)
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        g_DB.scan(params, function (err, data) {
+            // if there are any errors, return the error
+            if (err) {
+                reject(err);
+            }
+            // check to see if theres already a user with that email
+            else if (data.Items.length <= 0) {
+                resolve([]);
+            } else {
+                var userId = data.Items[0]["id"].N;
+                var userObjs = [];
+                data.Items.map((item) => {
+                    var userObj = AWSService.getUserObjectFromDBItem(item);
+                    userObjs.push(userObj);
+                });
+                resolve(userObjs);
+            }
+        });
+    });
+}
 module.exports = AWSService;

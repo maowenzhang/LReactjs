@@ -62,4 +62,31 @@ TestResult.prototype.submitTestResult = function(req, testResultData) {
     })
 }
 
+TestResult.prototype.getTestResultData = function(req) {
+    var that = this;
+    var userId = req.user.id;
+
+    return new Promise((resolve, reject) => {
+
+        // 1. Update test
+        AWSService.get().getAllUsers()
+        .then((users) => {
+            // 2. Prepare data
+            // 
+            var data = [];
+            users.map((item) => {
+                var tmpItem = {
+                    'id': item.id,
+                    'email': item.email,
+                    'userRole': item.userRole,
+                    'disc': item.disc,
+                };
+                data.push(tmpItem);
+            });
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
+}
 module.exports = TestResult;
