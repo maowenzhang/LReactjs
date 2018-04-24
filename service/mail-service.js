@@ -2,19 +2,17 @@ const nodemailer = require('nodemailer');
 
 var MailService = function() {
 
-    // create reusable transporter object using the default SMTP transport
+    this.fromEmail = 'assessment@x-giants.com';
+
     this.transporter = nodemailer.createTransport({
-        host: 'smtp.qq.com',
+        host: 'smtp.exmail.qq.com',
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: '251371245@qq.com',
+            user: this.fromEmail,
             pass: process.env.EMAIL_AUTHCODE
         }
     });
-
-    this.fromEmail = '251371245@qq.com';
-
 };
 
 
