@@ -144,3 +144,8 @@ a:hover {
   height: 50px;
   margin: 5px auto;
 }
+
+
+.navbar-brand2 {
+  background: url('/static/logo.jpg') no-repeat;
+}
