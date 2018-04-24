@@ -12,7 +12,8 @@ import Result from './components/Result.jsx';
 var headerContainer = document.getElementById('navbar-right-part');
 ReactDOM.render((
         <Header 
-            user={headerContainer.getAttribute('user')}
+            userEmail={headerContainer.getAttribute('userEmail')}
+            userName={headerContainer.getAttribute('userName')}
             userId={headerContainer.getAttribute('userId')}
             userRole={headerContainer.getAttribute('userRole')}
         />

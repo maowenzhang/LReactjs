@@ -42,7 +42,7 @@ AWSService.prototype.getDb = function() {
     return g_DB;
 }
 
-AWSService.prototype.getOrCreateUser = function(email, password) {
+AWSService.prototype.getOrCreateUser = function(email, password, userName, ownerUserId) {
     var that = this;
     var doesUserExist = false;
 
@@ -51,9 +51,9 @@ AWSService.prototype.getOrCreateUser = function(email, password) {
 		.then((userId) => {
 			if (userId) {
                 doesUserExist = true;
-                return that.getUser(userId);
+                return that.updateUserOwner(userId, ownerUserId);
 			}
-			return that.createUser(email, password);
+			return that.createUser(email, password, userName, ownerUserId);
 		}).then((userObj) => {
 			resolve(userObj, doesUserExist);
 		}).catch((err) => {
@@ -62,18 +62,27 @@ AWSService.prototype.getOrCreateUser = function(email, password) {
     });
 }
 
-AWSService.prototype.createUser = function(email, password) {
+AWSService.prototype.createUser = function(email, password, userName, ownerUserId) {
     var that = this;
     return new Promise((resolve, reject) => {
+        if (!userName) {
+            userName = '';
+        }
         var params = {
             "TableName": that.tableName,
             "Item": {
                 "id": { "N": (Math.floor(Math.random() * 4294967296)).toString() },
                 "email": { "S": email },
                 "pw": { "S": bcrypt.hashSync(password) },
-                "userRole": { "S": "member" }
+                "userRole": { "S": "member" },
+                "userName": { "S": userName }
             }
         };
+        // Can't put empty or invalid data type to dynamo DB
+        if (ownerUserId) {
+            params["Item"]["ownerUserId"] = { "N": ownerUserId };
+        }
+
         g_DB.putItem(params, function (err, data) {
             if (err) {
                 reject(err);
@@ -94,8 +103,17 @@ AWSService.getUserObjectFromDBItem = function(dbItem) {
     if (dbItem.userRole) {
         obj['userRole'] = dbItem.userRole.S;
     }
+    if (dbItem.userName) {
+        obj['userName'] = dbItem.userName.S;
+    }
     if (dbItem.disc) {
         obj['disc'] = dbItem.disc.S;
+    }
+    if (dbItem.testDate) {
+        obj['testDate'] = dbItem.testDate.S;
+    }
+    if (dbItem.ownerUserId) {
+        obj['ownerUserId'] = dbItem.ownerUserId.N;
     }
     return obj;
 }
@@ -117,18 +135,62 @@ AWSService.prototype.getUser = function(userId) {
     });
 }
 
-AWSService.prototype.updateUser = function(userId, testResultData) {
+AWSService.prototype.updateUserTestResult = function(userId, testResultData, testDate) {
+    var testData = JSON.stringify(testResultData);
+    var params = {
+            "UpdateExpression": "set disc = :val1, testDate = :val2",
+            "ExpressionAttributeValues": { 
+                ":val1": {"S": testData},
+                ":val2": {"S": testDate}
+            }
+        };
+    return this.updateUserBase(userId, params);
+}
+
+AWSService.prototype.updateUserOwner = function(userId, ownerUserId) {
+    var params = {
+            "UpdateExpression": "set ownerUserId = :val1",
+            "ExpressionAttributeValues": { 
+                ":val1": {"N": ownerUserId}
+            } 
+        };
+    return this.updateUserBase(userId, params);
+};
+
+AWSService.prototype.updateUserRole = function(userId, userRole) {
+    var params = {
+            "UpdateExpression": "set userRole = :val1",
+            "ExpressionAttributeValues": { 
+                ":val1": {"S": userRole}
+            }
+        };
+    return this.updateUserBase(userId, params);
+};
+
+AWSService.prototype.updateUserName = function(userId, userName) {
+    var params = {
+            "UpdateExpression": "set userName = :val1",
+            "ExpressionAttributeValues": { 
+                ":val1": {"S": userName}
+            } 
+        };
+    return this.updateUserBase(userId, params);
+};
+
+AWSService.prototype.updateUserBase = function(userId, inputParmas) {
     return new Promise((resolve, reject) => {
-        var testData = JSON.stringify(testResultData);
         var params = {
                         "TableName": this.tableName, 
                         "Key": { "id": { "N": userId } },
-                        "UpdateExpression": "set disc = :testData",
-                        "ExpressionAttributeValues": { 
-                            ":testData": {"S": testData}
-                        }, 
                         "ReturnValues" : 'ALL_NEW'
                     };
+        var updateParamNames = ['UpdateExpression', 'ExpressionAttributeValues'];
+        updateParamNames.map((item) => {
+            if (inputParmas[item]) {
+                params[item] = inputParmas[item];
+            }
+        })
+                    
         g_DB.updateItem(params, function (err, data) {
             if (err) {
                 reject(err);

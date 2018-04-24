@@ -49,12 +49,14 @@ app.use(passport.session());
 
 var getUserInfo = function (req) {
 	var userInfo = {
-		user: '',
+		userName: '',
+		userEmail: '',
 		userId: '',
 		userRole: ''
 	};
 	if (req.user) {
-		userInfo.user = req.user.email;
+		userInfo.userEmail = req.user.email;
+		userInfo.userName = req.user.userName;
 		userInfo.userId = req.user.id;
 		userInfo.userRole = req.user.userRole;
 	}
@@ -145,9 +147,11 @@ app.get('/invite', authAdmin, (req, res) => {
 app.post('/invite', authAdmin, (req, res) => {
 	var data = req.body;
 	var email = data.email;
+	var userName = data.userName;
+	var ownerUserId = data.ownerUserId;
 
 	let inviteUser = new InviteUser();
-	inviteUser.invite(req, email)
+	inviteUser.invite(req, email, userName, ownerUserId)
 		.then((data) => {
 			res.send(data);
 		}).catch((err) => {
@@ -202,6 +206,16 @@ app.get('/test-result-data', authAdmin, (req, res) => {
 			res.send(err);
 		})
 });
+
+app.get('/users/admin', authAdmin, (req, res) => {
+	let inviteUser = new InviteUser();
+	inviteUser.getAdminUserInfo(req)
+		.then((data) => {
+			res.send(data);
+		}).catch((err) => {
+			res.send(err);
+		})
+})
 
 // ------------------------------------------
 // Start Server

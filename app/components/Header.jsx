@@ -45,7 +45,7 @@ export default class Header extends React.Component {
     }
 
     isLogin() {
-        if (this.props.user) {
+        if (this.props.userEmail) {
             return true;
         }
         return false;
@@ -71,7 +71,7 @@ export default class Header extends React.Component {
     renderUserInfo() {
         return (
             <ul className="nav navbar-nav navbar-right">
-                <li className=""><a id="id-user" href="#">欢迎 {this.props.user}</a></li>
+                <li className=""><a id="id-user" href="#">欢迎 {this.props.userName}</a></li>
                 <li ><a href="/logout">退出</a></li>
             </ul>
         );

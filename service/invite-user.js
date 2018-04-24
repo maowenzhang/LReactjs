@@ -12,11 +12,11 @@ var InviteUser = function() {
     }
 }
 
-InviteUser.prototype.invite = function(req, email) {
+InviteUser.prototype.invite = function(req, email, userName, ownerUserId) {
     var that = this;
     return new Promise((resolve, reject) => {
         var password = '123xyz';
-        AWSService.get().getOrCreateUser(email, password)
+        AWSService.get().getOrCreateUser(email, password, userName, ownerUserId)
         .then((userObj, doesUserExist) => {
 
             var testLink = `http://${req.headers.host}/invite-link/${userObj.id}`;
@@ -29,11 +29,12 @@ InviteUser.prototype.invite = function(req, email) {
             var htmlFile = path.join(__dirname, '../views/email/', 'invite-email-html.pug');
             var html = pug.renderFile(htmlFile, {
                 'testLink': testLink,
-                'userEmail' : userObj.email
+                'userEmail' : userObj.email,
+                'userName': userObj.userName
             });
             g_mailService.sendMail(email, subject, text, html)
             .then((data) => {
-                var msg = `邮件已成功发送给 ${email}，邮件标题为：${subject}`;
+                var msg = `邮件已成功发送给 ${userObj.userName} (${email})，邮件标题为：${subject}`;
                 resolve(msg);
             }).catch((err) => {
                 reject(err);
@@ -72,4 +73,28 @@ InviteUser.prototype.logInInvitedUser = function(req, userId) {
         });
     })
 }
+
+InviteUser.prototype.getAdminUserInfo = function(req) {
+    var that = this;
+    return new Promise((resolve, reject) => {
+        AWSService.get().getAdminUsers()
+        .then((adminUsers) => {
+            // Prepare data
+            var data = [];
+            adminUsers.map((item) => {
+                var tmpItem = {
+                    'id': item.id,
+                    'userName': item.userName,
+                    'email': item.email
+                };
+                data.push(tmpItem);
+            });
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        });
+    })
+}
+
+
 module.exports = InviteUser;

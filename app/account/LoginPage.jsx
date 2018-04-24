@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
     this.state = {
       errors: {},
       user: {
-        email: this.props.user,
+        email: this.props.userEmail,
         password: ''
       }
     };
@@ -75,7 +75,7 @@ if (document.getElementById('login-app')) {
   var container = document.getElementById('login-app');
   ReactDOM.render((
           <LoginPage 
-              user={container.getAttribute('user')}
+              userEmail={container.getAttribute('userEmail')}
           />
       ),
       container

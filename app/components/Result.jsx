@@ -25,9 +25,11 @@ export default class Result extends React.Component {
                 <thead>
                     <tr>
                         <th data-sortable="true" data-field="id">用户ID</th>
-                        <th data-field="email">Email</th>
-                        <th data-field="userRole">用户角色</th>
+                        <th data-sortable="true" data-field="userName">姓名</th>
+                        <th data-sortable="true" data-field="email">Email</th>
+                        <th data-sortable="true" data-field="userRole">用户角色</th>
                         <th data-field="disc">DISC 测试结果</th>
+                        <th data-field="testDate">测试完成时间</th>
                     </tr>
                 </thead>
             </table>

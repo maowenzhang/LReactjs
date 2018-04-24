@@ -134,9 +134,10 @@ a:hover {
    }
 }
 
-#id-email {
+.my-control {
   width: 350px;
-  margin: 20px auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .loading-placeholder {
@@ -148,4 +149,12 @@ a:hover {
 
 .navbar-brand2 {
   background: url('/static/logo.jpg') no-repeat;
+}
+
+.btn .caret {
+  margin-left: 10px;
+}
+
+.alert {
+  padding: 10px;
 }

@@ -39,12 +39,13 @@ passport.use('local-signup', new LocalStrategy({
 		passReqToCallback: true // allows us to pass back the entire request to the callback
 	},
 	function (req, email, password, done) {
+		var userName = req.body.userName;
 		AWSService.get().getUserByEmail(email)
 		.then((userId) => {
 			if (userId) {
 				return done(null, false, ('signupMessage', 'That email is already taken.'));
 			}
-			return AWSService.get().createUser(email, password);
+			return AWSService.get().createUser(email, password, userName);
 		}).then((userObj) => {
 			return done(null, );
 		}).catch((err) => {

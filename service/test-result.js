@@ -15,24 +15,27 @@ var TestResult = function() {
 TestResult.prototype.submitTestResult = function(req, testResultData) {
     var that = this;
     var userId = req.user.id;
-
+    var testDateObj = new Date();
+    var testDate = testDateObj.toISOString();
     return new Promise((resolve, reject) => {
         var theUserObj = null;
 
         // 1. Update test
-        AWSService.get().updateUser(userId, testResultData)
+        AWSService.get().updateUserTestResult(userId, testResultData, testDate)
         .then((userObj) => {
             theUserObj = userObj;
-            // 2. Get admin users
-            return AWSService.get().getAdminUsers();
-        }).then((adminUsers) => {
+            // 2. Get ownerUser
+            var ownerUserId = theUserObj.ownerUserId;
+            return AWSService.get().getUser(ownerUserId);
+        }).then((ownerUserObj) => {
             // 3. Send email to admin
             // 
-            var adminEmails = [];
-            adminUsers.map((item) => {
-                adminEmails.push(item.email);
-            });
-            var toEmail = adminEmails.join(',');
+            if (!ownerUserObj) {
+                var msg = "邀请的用户没有对应的负责人！";
+                resolve(msg);
+                return;
+            }
+            var toEmail = ownerUserObj.email;
 
             var testLink = `http://${req.headers.host}/test-result`;
             var subject = '嘉驰国际: DISC性格测试结果';
@@ -45,8 +48,10 @@ TestResult.prototype.submitTestResult = function(req, testResultData) {
             var htmlFile = path.join(__dirname, '../views/email/', 'test-result-email-html.pug');
             var html = pug.renderFile(htmlFile, {
                 'testLink': testLink,
+                'userName': theUserObj.userName,
                 'userEmail': theUserObj.email,
-                'testResult': testResultDataStr
+                'testResult': testResultDataStr,
+                'ownerUserName': ownerUserObj.userName
             });
             g_mailService.sendMail(toEmail, subject, text, html)
             .then((data) => {
@@ -77,9 +82,11 @@ TestResult.prototype.getTestResultData = function(req) {
             users.map((item) => {
                 var tmpItem = {
                     'id': item.id,
+                    'userName': item.userName,
                     'email': item.email,
                     'userRole': item.userRole,
                     'disc': item.disc,
+                    'testDate': item.testDate
                 };
                 data.push(tmpItem);
             });
