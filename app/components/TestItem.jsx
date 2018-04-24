@@ -22,7 +22,7 @@ export default class TestItem extends React.Component {
                     {this.props.options.map((item, index) => 
                         <button className="btn btn-lg btn-default option" 
                                 key={index}
-                                onClick={() => this.handleClick(item[2])}>{item[0]}. {item[1]} ({item[2]})</button>
+                                onClick={() => this.handleClick(item[2])}>{item[0]}. {item[1]}</button>
                     )}
             </div>
         );
