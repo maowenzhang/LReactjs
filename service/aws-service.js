@@ -95,6 +95,16 @@ AWSService.prototype.createUser = function(email, password, userName, ownerUserI
 }
 
 AWSService.getUserObjectFromDBItem = function(dbItem) {
+    // in case invalid item
+    if (!dbItem) {
+        var obj = {
+            "id"    :    '',
+            "email" :    '',
+            "pw"    :    '',
+        };
+        return obj;
+    }
+
     var obj = {
         "id"    :    dbItem.id.N,
         "email" :    dbItem.email.S,
