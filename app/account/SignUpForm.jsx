@@ -23,7 +23,7 @@ const SignUpForm = ({
         <input className="form-control required" type="password" placeholder="再次输入密码" name="rpassword"/>
       </div>
       <div className="form-group">
-        <input type="submit" className="btn btn-success" value="创建新账号"/>  
+        <input type="submit" className="btn btn-primary btn-lg" value="创建新账号"/>  
       </div>
 
     </form>

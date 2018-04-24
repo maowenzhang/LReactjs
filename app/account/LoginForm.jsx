@@ -22,7 +22,7 @@ const LoginForm = ({
       </div>
 
       <div className="form-group">
-        <button className="btn btn-success" type="submit" label="登陆">登 陆</button>
+        <button className="btn btn-primary btn-lg" type="submit" label="登陆">登 陆</button>
       </div>
     </form>
   </div>
