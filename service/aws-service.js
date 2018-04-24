@@ -12,6 +12,15 @@ var AWSService = function() {
             aws.config.region = process.env.REGION
         }
         aws.config.update({region: "ap-southeast-1"});
+
+        // if (process.env.AWS_ACCESS_KEY_ID) {
+        //     console.log(process.env.AWS_ACCESS_KEY_ID);
+        //     aws.config.update({accessKeyId: process.env.AWS_ACCESS_KEY_ID});
+        // }
+        // if (process.env.AWS_SECRET_ACCESS_KEY) {
+        //     console.log(process.env.AWS_SECRET_ACCESS_KEY);
+        //     aws.config.update({secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY});
+        // }
         // else {
         //     aws.config.update({region: "ap-southeast-1"});
         //     aws.config.credentials = new aws.SharedIniFileCredentials({profile: 'default'});

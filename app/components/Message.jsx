@@ -22,7 +22,7 @@ export default class Message extends React.Component {
             return (<div/>);
         }
         return (
-            <div>
+            <div className="center">
             {this.props.message && 
                 <div className={(this.props.simpleFormat ? "" : "row alert alert-success")}>
                     <button type="button" className="close" data-dismiss="alert">×</button>

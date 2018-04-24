@@ -39,7 +39,8 @@ export default class TestApp extends React.Component {
             messageOption: {
                 message: '',
                 errorMessage: '',
-                show: true
+                show: true,
+                simpleFormat: true
             }
         }
     }
