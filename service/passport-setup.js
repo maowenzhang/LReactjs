@@ -17,6 +17,9 @@ passport.serializeUser(function (user, done) {
 
 // used to deserialize the user
 passport.deserializeUser(function (id, done) {
+	// Uncomment below to enable debugging without network
+	// done(null, {});
+
 	AWSService.get().getUser(id)
 	.then((data) => {
 		done(null, data);

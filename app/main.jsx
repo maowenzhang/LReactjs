@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import TestApp from './components/TestApp.jsx'; 
 import Header from './components/Header.jsx';
 import Invite from './components/Invite.jsx';

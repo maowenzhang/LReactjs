@@ -14,10 +14,10 @@ const SignUpForm = ({
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       <div className="form-group">
-        <input className="form-control mail" type="text" placeholder="Email" name="email"/>
+        <input className="form-control" type="text" placeholder="姓名" name="userName"/>
       </div>
       <div className="form-group">
-        <input className="form-control" type="text" placeholder="姓名" name="userName"/>
+        <input className="form-control mail" type="text" placeholder="Email" name="email"/>
       </div>
       <div className="form-group">
         <input className="form-control required" type="password" placeholder="密码" id="register_password" name="password"/>

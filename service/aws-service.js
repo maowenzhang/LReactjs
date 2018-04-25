@@ -103,9 +103,9 @@ AWSService.formatedDISCTestResult = function(disc) {
         return '';
     }
     var count_D = jsonDisc['D'] || 0;
-    var count_D = jsonDisc['I'] || 0;
-    var count_D = jsonDisc['S'] || 0;
-    var count_D = jsonDisc['C'] || 0;
+    var count_I = jsonDisc['I'] || 0;
+    var count_S = jsonDisc['S'] || 0;
+    var count_C = jsonDisc['C'] || 0;
     var tmp = `D-${count_D}, I-${count_I}, S-${count_S}, C-${count_C}`;
     return tmp;
 }

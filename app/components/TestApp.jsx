@@ -1,4 +1,4 @@
-var React = require('react');
+// var React = require('react');
 
 import TestItem from './TestItem.jsx';
 import StartTest from './StartTest.jsx';
