@@ -94,6 +94,22 @@ AWSService.prototype.createUser = function(email, password, userName, ownerUserI
     });
 }
 
+AWSService.formatedDISCTestResult = function(disc) {
+    if (!disc) {
+        return '';
+    }
+    var jsonDisc = JSON.parse(disc);
+    if (!jsonDisc) {
+        return '';
+    }
+    var count_D = jsonDisc['D'] || 0;
+    var count_D = jsonDisc['I'] || 0;
+    var count_D = jsonDisc['S'] || 0;
+    var count_D = jsonDisc['C'] || 0;
+    var tmp = `D-${count_D}, I-${count_I}, S-${count_S}, C-${count_C}`;
+    return tmp;
+}
+
 AWSService.getUserObjectFromDBItem = function(dbItem) {
     // in case invalid item
     if (!dbItem) {
@@ -117,7 +133,8 @@ AWSService.getUserObjectFromDBItem = function(dbItem) {
         obj['userName'] = dbItem.userName.S;
     }
     if (dbItem.disc) {
-        obj['disc'] = dbItem.disc.S;
+        var tmp = AWSService.formatedDISCTestResult(dbItem.disc.S);
+        obj['disc'] = tmp;
     }
     if (dbItem.testDate) {
         obj['testDate'] = dbItem.testDate.S;
