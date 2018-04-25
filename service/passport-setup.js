@@ -46,13 +46,17 @@ passport.use('local-signup', new LocalStrategy({
 		AWSService.get().getUserByEmail(email)
 		.then((userId) => {
 			if (userId) {
-				return done(null, false, ('signupMessage', 'That email is already taken.'));
+				// done(err, user, info)
+				return done(null, null, ('signupMessage', 'Email已经被占用'));
 			}
-			return AWSService.get().createUser(email, password, userName);
-		}).then((userObj) => {
-			return done(null, );
+			AWSService.get().createUser(email, password, userName)
+			.then((userObj) => {
+				return done(null, userObj, ('signupMessage', "注册成功"));
+			}).catch((err) => {
+				return done(err);
+			});
 		}).catch((err) => {
-			return done(null, false, ('signupMessage', "Apologies, please try again now. (" + err + ")"));
+			return done(err);
 		});
 	}
 ));

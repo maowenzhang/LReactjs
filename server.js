@@ -90,11 +90,42 @@ app.get('/signup',
 		res.render('signup');
 	});
 
-app.post('/signup',
+app.post('/signup2',
 	passport.authenticate('local-signup', { failureRedirect: '/login' }),
 	function (req, res) {
 		res.redirect('/');
 	});
+
+var getErrorMessage = function(err) {
+	if (!err) {
+		return '';
+	}
+	var msg = "很抱歉，有错误，请重试或联系管理员 (" + err.message + ")";
+	return msg;
+}
+
+app.post('/signup', function(req, res) {
+	passport.authenticate('local-signup', function(err, user, info) {
+		if (err) { 
+			var msg = getErrorMessage(err);
+			res.json({'status' : 500, 'message' : msg});
+		}
+		else if (!user) { 
+			res.json({'status' : 403, 'message' : info});
+		}
+		else {
+			req.logIn(user, function(err) {
+				if (err) { 
+					var msg = getErrorMessage(err);
+					res.json({'status' : 500, 'message' : msg});
+				} else {
+					// success!
+					res.json({'status' : 200, 'message' : ''});
+				}
+			});
+		}
+	})(req, res);
+});
 
 app.get('/profile',
 	require('connect-ensure-login').ensureLoggedIn(),

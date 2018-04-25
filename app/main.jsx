@@ -3,10 +3,7 @@ import TestApp from './components/TestApp.jsx';
 import Header from './components/Header.jsx';
 import Invite from './components/Invite.jsx';
 import Result from './components/Result.jsx';
-
-// import LoginPage from './account/LoginPage.jsx';
-// import SignUpPage from './account/SignUpPage.jsx';
-// import { BrowserRouter, Route } from 'react-router-dom';
+import SignUpForm from './components/SignUpForm.jsx';
 
 var headerContainer = document.getElementById('navbar-right-part');
 ReactDOM.render((
@@ -32,23 +29,6 @@ if (document.getElementById('result-app')) {
     ReactDOM.render(<Result />, document.getElementById('result-app'));
 }
 
-// import { browserHistory } from 'react-router';
-
-// import createBrowserHistory from 'history/createBrowserHistory'
-// const newHistory = createBrowserHistory();
-
-// ReactDOM.render((
-//         <div>
-//             <BrowserRouter>
-//                 <Route path="/" component={TestApp}/>
-//             </BrowserRouter>
-//             <BrowserRouter>
-//                 <Route path="/login" component={LoginPage}/>
-//             </BrowserRouter>
-//             <BrowserRouter>
-//                 <Route path="/signup" component={SignUpPage}/>
-//             </BrowserRouter>
-//         </div>
-//     ),
-//     document.getElementById('react-app')
-// );
+if (document.getElementById('signup-app')) {
+    ReactDOM.render(<SignUpForm />, document.getElementById('signup-app'));
+}
