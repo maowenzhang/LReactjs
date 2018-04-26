@@ -31,7 +31,7 @@ TestResult.prototype.submitTestResult = function(req, testResultData) {
             // 3. Send email to admin
             // 
             if (!ownerUserObj) {
-                var msg = "邀请的用户没有对应的负责人！";
+                var msg = "测试结果已提交，谢谢！";
                 resolve(msg);
                 return;
             }

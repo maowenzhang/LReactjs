@@ -147,6 +147,10 @@ AWSService.getUserObjectFromDBItem = function(dbItem) {
 
 AWSService.prototype.getUser = function(userId) {
     return new Promise((resolve, reject) => {
+        if (!userId) {
+            resolve(null);
+            return;
+        }
         var params = {
                         "TableName": this.tableName, 
                         "Key": { "id": { "N": userId } } 
