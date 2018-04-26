@@ -195,9 +195,10 @@ app.post('/invite', authAdmin, (req, res) => {
 	let inviteUser = new InviteUser();
 	inviteUser.invite(req, email, userName, ownerUserId)
 		.then((data) => {
-			res.send(data);
+			res.json({'status' : 200, 'message' : data});
 		}).catch((err) => {
-			res.send(err);
+			var msg = `邀请失败，请检查输入的Email地址，谢谢！(${err.message})`;
+			res.json({'status' : 401, 'message' : msg});
 		})
 });
 

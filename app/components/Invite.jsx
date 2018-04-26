@@ -172,14 +172,18 @@ export default class Invite extends React.Component {
           method: 'POST',
           data: data,
           success: function(result) {
-            that.state.messageOption.message = result;
+            if (result.status === 200) {
+              that.state.messageOption.message = result.message;
+            } else {
+              that.state.messageOption.errorMessage = result.message;
+            }
             that.state.isSendingEmail = false;
             that.state.disableSubmit = false;
             that.setState(that.state);
           },
           error: function(xhr, status, err) {
-            console.error("Failed to invite user ", status, err);
-            that.state.messageOption.errorMessage = err;
+            var msg = "邀请失败，请检查网络重试或联系管理员，谢谢！" + err;
+            that.state.messageOption.errorMessage = msg;
             that.state.isSendingEmail = false;
             that.state.disableSubmit = false;
             that.setState(that.state);

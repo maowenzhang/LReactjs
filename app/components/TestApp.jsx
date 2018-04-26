@@ -191,7 +191,7 @@ export default class TestApp extends React.Component {
                 this.updateStateData();
             }.bind(this),
             error: function(xhr, status, err) {
-                console.error("fail to get disc test data!", status, err.toString());
+                console.error("fail to get disc test data!", status, err);
             }.bind(this)
         });
     }
