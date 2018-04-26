@@ -162,11 +162,11 @@ app.get('/api/test/disc', function (req, res) {
 // 
 var authAdmin = function (req, res, next) {
 	if (!req.user) {
-		redirect('/login');
+		res.redirect('/login');
 		return;
 	}
 	if (!req.user.userRole === 'admin') {
-		redirect('/login');
+		res.redirect('/login');
 		return;
 	}
 
