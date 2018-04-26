@@ -77,16 +77,22 @@ TestResult.prototype.getTestResultData = function(req) {
         AWSService.get().getAllUsers()
         .then((users) => {
             // 2. Prepare data
-            // 
+            //
             var data = [];
             users.map((item) => {
+                var localTestDateStr = '';
+                if (item.testDate) {
+                    var localTestDate = new Date(item.testDate);
+                    localTestDateStr = localTestDate.toLocaleString({ timeZone: 'Asia/Shanghai' });
+                }
+
                 var tmpItem = {
                     'id': item.id,
                     'userName': item.userName,
                     'email': item.email,
                     'userRole': item.userRole,
                     'disc': item.disc,
-                    'testDate': item.testDate
+                    'testDate': localTestDateStr
                 };
                 data.push(tmpItem);
             });

@@ -20,7 +20,6 @@ export default class Result extends React.Component {
       return (
         <div className="container">
             <h2>测试结果</h2>
-            <Spinner className="data-panel-spinner" show={this.state.isLoading}/>
             <table data-pagination="true" data-search="true" data-toggle="table" data-url="/test-result-data">
                 <thead>
                     <tr>
@@ -28,8 +27,8 @@ export default class Result extends React.Component {
                         <th data-sortable="true" data-field="userName">姓名</th>
                         <th data-sortable="true" data-field="email">Email</th>
                         <th data-sortable="true" data-field="userRole">用户角色</th>
-                        <th data-field="disc">DISC 测试结果</th>
-                        <th data-field="testDate">测试完成时间</th>
+                        <th data-sortable="true" data-field="disc">DISC 测试结果</th>
+                        <th data-sortable="true" data-field="testDate">测试完成时间</th>
                     </tr>
                 </thead>
             </table>
