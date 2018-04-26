@@ -29,13 +29,13 @@ export default class SingUpForm extends React.Component {
             <p/>
 
             <div className="form-group">
-              <input className="form-control" type="text" placeholder="姓名" name="userName" 
-                      onChange={this.onChangeUserName.bind(this)}
+              <input className="form-control mail" type="text" placeholder="Email" name="email" 
+                      onChange={this.onChangeEmail.bind(this)}
                       onBlur={this.onBlur.bind(this)}/>
             </div>
             <div className="form-group">
-              <input className="form-control mail" type="text" placeholder="Email" name="email" 
-                      onChange={this.onChangeEmail.bind(this)}
+              <input className="form-control" type="text" placeholder="姓名" name="userName" 
+                      onChange={this.onChangeUserName.bind(this)}
                       onBlur={this.onBlur.bind(this)}/>
             </div>
             <div className="form-group">

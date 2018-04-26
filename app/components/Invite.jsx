@@ -22,23 +22,25 @@ export default class Invite extends React.Component {
 
     render() {
       return (
+        <div className="jumbotron">
         <div className="container">
+          <h2 className="bigTitle">邀请好友参加测试</h2>
           <form method="post" action="/invite" onSubmit={this.onSubmit.bind(this)} className="form-horizontal" id="login_form">
-            <h2>邀请好友参加测试</h2>
             <p/>
+
+            <div className="form-group">
+                <input className="form-control my-control" 
+                       id="id-email" type="text"
+                       placeholder="Email" name="email" 
+                       onChange={this.onChangeEmail.bind(this)}
+                       onBlur={this.onBlur.bind(this)}/>
+            </div>
 
             <div className="form-group">
                 <input className="form-control my-control" 
                        id="id-userName" type="text"
                        placeholder="姓名" name="userName" 
                        onChange={this.onChangeUserName.bind(this)}
-                       onBlur={this.onBlur.bind(this)}/>
-            </div>
-            <div className="form-group">
-                <input className="form-control my-control" 
-                       id="id-email" type="text"
-                       placeholder="Email" name="email" 
-                       onChange={this.onChangeEmail.bind(this)}
                        onBlur={this.onBlur.bind(this)}/>
             </div>
 
@@ -67,6 +69,7 @@ export default class Invite extends React.Component {
             <Message {... this.state.messageOption}/>
 
           </form>
+        </div>
         </div>
       );
     }
