@@ -4,6 +4,7 @@ import Header from './components/Header.jsx';
 import Invite from './components/Invite.jsx';
 import Result from './components/Result.jsx';
 import SignUpForm from './components/SignUpForm.jsx';
+import LogInForm from './components/LogInForm.jsx';
 
 var headerContainer = document.getElementById('navbar-right-part');
 ReactDOM.render((
@@ -31,4 +32,15 @@ if (document.getElementById('result-app')) {
 
 if (document.getElementById('signup-app')) {
     ReactDOM.render(<SignUpForm />, document.getElementById('signup-app'));
+}
+
+if (document.getElementById('login-app')) {
+    var container = document.getElementById('login-app');
+    ReactDOM.render((
+            <LogInForm 
+                email={container.getAttribute('email')}
+            />
+        ),
+        container
+    );
 }

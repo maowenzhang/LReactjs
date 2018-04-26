@@ -77,15 +77,19 @@ passport.use('local-login', new LocalStrategy({
 		AWSService.get().getUserByEmail(email)
 		.then((userId) => {
 			if (!userId) {
-				return done(null, false, ('loginMessage', 'No user found.'));
+				// done(err, user, info)
+				return done(null, null, ('loginMessage', '指定邮件的账号不存在，请重新输入'));
 			}
-			return AWSService.get().getUser(userId);
-		}).then((userObj) => {
-			if (!bcrypt.compareSync(password, userObj.pw)) {
-				return done(null, false, ('loginMessage', 'Oops! Wrong password.'));
-			} else {
-				return done(null, userObj);
-			}
+			AWSService.get().getUser(userId)
+			.then((userObj) => {
+				if (!bcrypt.compareSync(password, userObj.pw)) {
+					return done(null, null, ('loginMessage', '账号或密码错误，请重新输入'));
+				} else {
+					return done(null, userObj);
+				}
+			}).catch((err) => {
+				return done(err);
+			});
 		}).catch((err) => {
 			return done(err);
 		});

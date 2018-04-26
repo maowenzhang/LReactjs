@@ -4,10 +4,6 @@ html
     body
         include partials/nav.pug
 
-        div(id="login-app-container")
-            .jumbotron
-                .LoginPanel
-                    h2.bigTitle 登陆
-                    div(id="login-app" userEmail=userEmail)
+        div(id="login-app" email=email)
 
     include partials/tail.pug

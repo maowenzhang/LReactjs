@@ -73,12 +73,6 @@ app.get('/login',
 		res.render('login', {user : ''});
 	});
 
-app.post('/login',
-	passport.authenticate('local-login', { failureRedirect: '/login' }),
-	function (req, res) {
-		res.redirect('/');
-	});
-
 app.get('/logout',
 	function (req, res) {
 		req.logout();
@@ -90,12 +84,6 @@ app.get('/signup',
 		res.render('signup');
 	});
 
-app.post('/signup2',
-	passport.authenticate('local-signup', { failureRedirect: '/login' }),
-	function (req, res) {
-		res.redirect('/');
-	});
-
 var getErrorMessage = function(err) {
 	if (!err) {
 		return '';
@@ -103,6 +91,29 @@ var getErrorMessage = function(err) {
 	var msg = "很抱歉，有错误，请重试或联系管理员 (" + err.message + ")";
 	return msg;
 }
+
+app.post('/login', function(req, res) {
+	passport.authenticate('local-login', function(err, user, info) {
+		if (err) { 
+			var msg = getErrorMessage(err);
+			res.json({'status' : 500, 'message' : msg});
+		}
+		else if (!user) { 
+			res.json({'status' : 403, 'message' : info});
+		}
+		else {
+			req.logIn(user, function(err) {
+				if (err) { 
+					var msg = getErrorMessage(err);
+					res.json({'status' : 500, 'message' : msg});
+				} else {
+					// success!
+					res.json({'status' : 200, 'message' : ''});
+				}
+			});
+		}
+	})(req, res);
+});
 
 app.post('/signup', function(req, res) {
 	passport.authenticate('local-signup', function(err, user, info) {
@@ -199,7 +210,7 @@ app.get('/invite-link/:userId', (req, res) => {
 			if (data.hasLogIn) {
 				res.redirect('/');
 			} else {
-				res.render('login', {user : data.userObj.email});
+				res.render('login', {email : data.userObj.email});
 			}
 		}).catch((err) => {
 			res.send(err);
